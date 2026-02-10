@@ -30,8 +30,7 @@
         input[type="text"],
         input[type="email"],
         input[type="number"],
-        select,
-        textarea {
+        select {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -75,34 +74,35 @@
 <div class="container">
     <h2>Student Registration Form</h2>
 
-    <form>
+    <form method="post">
+
+        <!-- Reg Number -->
+        <label>Register Number:</label>
+        <input type="number" name="reg_number" placeholder="Enter register number" required>
 
         <label>Student Name:</label>
-        <input type="text" placeholder="Enter your name">
+        <input type="text" name="student_name" placeholder="Enter your name" required>
 
         <label>Email:</label>
-        <input type="email" placeholder="Enter your email">
+        <input type="email" name="email" placeholder="Enter your email" required>
 
         <label>Age:</label>
-        <input type="number" placeholder="Enter your age">
+        <input type="number" name="age" placeholder="Enter your age" required>
 
         <label>Gender:</label>
         <div class="gender">
-            <input type="radio" name="gender"> Male
-            <input type="radio" name="gender"> Female
+            <input type="radio" name="gender" value="Male" required> Male
+            <input type="radio" name="gender" value="Female"> Female
         </div>
 
         <label>Course:</label>
-        <select>
-            <option>Select course</option>
+        <select name="course" required>
+            <option value="">Select course</option>
             <option>Computer Science</option>
             <option>IT</option>
             <option>Mechanical</option>
             <option>Electrical</option>
         </select>
-
-        <label>Address:</label>
-        <textarea rows="3"></textarea>
 
         <div class="buttons">
             <input type="submit" value="Register">
