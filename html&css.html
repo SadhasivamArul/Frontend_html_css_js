@@ -233,7 +233,7 @@ function validateForm(event) {
     }
 
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/.test(email.value)) {
-        showError(email, "Enter valid email ending with .com");
+        showError(email, "Enter valid email");
         email.focus();
         event.preventDefault();
         return false;
