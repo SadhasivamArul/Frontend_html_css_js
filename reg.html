@@ -2,41 +2,50 @@
 <html>
 <head>
     <title>Student Registration</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>Student Registration Form</h2>
+<div class="container">
+    <h2>Student Registration Form</h2>
 
-<form>
-    <label>Student Name:</label><br>
-    <input type="text" placeholder="Enter your name"><br><br>
+    <form method="post">
 
-    <label>Email:</label><br>
-    <input type="email" placeholder="Enter your email"><br><br>
+        <label>Register Number:</label>
+        <input type="number" name="reg_number" placeholder="Enter register number" required>
 
-    <label>Age:</label><br>
-    <input type="number" placeholder="Enter your age"><br><br>
+        <label>Student Name:</label>
+        <input type="text" name="student_name" placeholder="Enter your name" required>
 
-    <label>Gender:</label><br>
-    <input type="radio" name="gender"> Male
-    <input type="radio" name="gender"> Female<br><br>
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
 
-    <label>Course:</label><br>
-    <select>
-        <option>Select course</option>
-        <option>Computer Science</option>
-        <option>IT</option>
-        <option>Mechanical</option>
-        <option>Electrical</option>
-    </select><br><br>
+        <label>Age:</label>
+        <input type="number" name="age" placeholder="Enter your age" required>
 
-    <label>Address:</label><br>
-    <textarea rows="3" cols="30"></textarea><br><br>
+        <label>Gender:</label>
+        <div class="gender">
+            <input type="radio" name="gender" value="Male" required> Male
+            <input type="radio" name="gender" value="Female"> Female
+        </div>
 
-    <input type="submit" value="Register">
-    <input type="reset" value="Clear">
+        <label>Course:</label>
+        <select name="course" required>
+            <option value="">Select course</option>
+            <option>Computer Science</option>
+            <option>IT</option>
+            <option>Mechanical</option>
+            <option>Electrical</option>
+        </select>
 
-</form>
+        <div class="buttons">
+            <input type="submit" value="Register">
+            <input type="reset" value="Clear">
+        </div>
+
+    </form>
+</div>
 
 </body>
 </html>
