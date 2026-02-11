@@ -10,7 +10,7 @@
 <div class="container">
     <h2>Student Registration Form</h2>
 
-    <form method="post">
+    <form id="studentForm">
 
         <label>Register Number:</label>
         <input type="number" name="reg_number" placeholder="Enter register number" required>
@@ -26,7 +26,7 @@
 
         <label>Gender:</label>
         <div class="gender">
-            <input type="radio" name="gender" value="Male" required> Male
+            <input type="radio" name="gender" value="Male"> Male
             <input type="radio" name="gender" value="Female"> Female
         </div>
 
@@ -46,6 +46,8 @@
 
     </form>
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
