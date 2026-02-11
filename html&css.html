@@ -66,6 +66,19 @@
         input[type="reset"]:hover {
             opacity: 0.9;
         }
+		.error 
+		{
+    color: red;
+    font-size: 13px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.invalid
+ {
+    border: 2px solid red !important;
+}
+
     </style>
 </head>
 
@@ -74,27 +87,43 @@
 <div class="container">
     <h2>Student Registration Form</h2>
 
-    <form method="post">
+    <form onsubmit="return validateForm(event);">
 
-        <!-- Reg Number -->
+        <!-- Register Number -->
         <label>Register Number:</label>
-        <input type="number" name="reg_number" placeholder="Enter register number" required>
+        <input type="number" name="reg_number"
+        placeholder="Enter register number"
+        oninput="limitRegNumber(this)"
+        required>
 
+        <!-- Student Name -->
         <label>Student Name:</label>
-        <input type="text" name="student_name" placeholder="Enter your name" required>
+        <input type="text" name="student_name"
+        placeholder="Enter your name"
+        oninput="validateName(this)"
+        required>
 
+        <!-- Email -->
         <label>Email:</label>
-        <input type="email" name="email" placeholder="Enter your email" required>
+        <input type="email" name="email"
+        placeholder="Enter your email"
+        oninput="validateEmail(this)"
+        required>
 
+        <!-- Age -->
         <label>Age:</label>
-        <input type="number" name="age" placeholder="Enter your age" required>
+        <input type="number" name="age"
+        placeholder="Enter your age"
+        required>
 
+        <!-- Gender -->
         <label>Gender:</label>
         <div class="gender">
             <input type="radio" name="gender" value="Male" required> Male
             <input type="radio" name="gender" value="Female"> Female
         </div>
 
+        <!-- Course -->
         <label>Course:</label>
         <select name="course" required>
             <option value="">Select course</option>
@@ -111,6 +140,131 @@
 
     </form>
 </div>
+
+<script>
+
+function showError(input, message) {
+    input.classList.add("invalid");
+
+    let error = input.nextElementSibling;
+    if (!error || !error.classList.contains("error")) {
+        error = document.createElement("div");
+        error.className = "error";
+        input.parentNode.insertBefore(error, input.nextSibling);
+    }
+    error.innerText = message;
+}
+
+function clearError(input) {
+    input.classList.remove("invalid");
+
+    let error = input.nextElementSibling;
+    if (error && error.classList.contains("error")) {
+        error.remove();
+    }
+}
+
+// Register Number Validation
+document.getElementsByName("reg_number")[0].addEventListener("blur", function() {
+    let value = this.value;
+    if (!/^\d{10}$/.test(value)) {
+        showError(this, "Register Number must be exactly 10 digits");
+        this.focus();
+    } else {
+        clearError(this);
+    }
+});
+
+// Name Validation
+document.getElementsByName("student_name")[0].addEventListener("blur", function() {
+    let value = this.value;
+    if (!/^[A-Za-z\s]+$/.test(value)) {
+        showError(this, "Name must contain only letters");
+        this.focus();
+    } else {
+        clearError(this);
+    }
+});
+
+// Email Validation
+document.getElementsByName("email")[0].addEventListener("blur", function() {
+    let value = this.value;
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/.test(value)) {
+        showError(this, "Enter valid email ending with .com");
+        this.focus();
+    } else {
+        clearError(this);
+    }
+});
+
+// Age Validation
+document.getElementsByName("age")[0].addEventListener("blur", function() {
+    let value = this.value;
+    if (value < 17 || value > 30) {
+        showError(this, "Age must be between 17 and 30");
+        this.focus();
+    } else {
+        clearError(this);
+    }
+});
+
+// Final Submit Validation
+function validateForm(event) {
+
+    let reg = document.getElementsByName("reg_number")[0];
+    let name = document.getElementsByName("student_name")[0];
+    let email = document.getElementsByName("email")[0];
+    let age = document.getElementsByName("age")[0];
+    let gender = document.querySelector('input[name="gender"]:checked');
+    let course = document.getElementsByName("course")[0];
+
+    if (!/^\d{10}$/.test(reg.value)) {
+        showError(reg, "Register Number must be exactly 10 digits");
+        reg.focus();
+        event.preventDefault();
+        return false;
+    }
+
+    if (!/^[A-Za-z\s]+$/.test(name.value)) {
+        showError(name, "Name must contain only letters");
+        name.focus();
+        event.preventDefault();
+        return false;
+    }
+
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/.test(email.value)) {
+        showError(email, "Enter valid email ending with .com");
+        email.focus();
+        event.preventDefault();
+        return false;
+    }
+
+    if (age.value < 17 || age.value > 30) {
+        showError(age, "Age must be between 17 and 30");
+        age.focus();
+        event.preventDefault();
+        return false;
+    }
+
+    if (!gender) {
+        alert("Please select Gender");
+        event.preventDefault();
+        return false;
+    }
+
+    if (course.value === "") {
+        alert("Please select Course");
+        course.focus();
+        event.preventDefault();
+        return false;
+    }
+
+    alert("Form Submitted Successfully ✅");
+    return true;
+}
+
+</script>
+
 
 </body>
 </html>
